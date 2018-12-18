@@ -15,6 +15,116 @@ namespace cirno.Numerics
             throw new NotImplementedException();
         }
 
+        public Number Add(Number other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Subtract(Number other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Multiply(Number other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Divide(Number other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Remainder(Number other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number DivideRemainder(Number other, out Number remainder)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Pow(Number exponent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Sqrt()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Log10()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Log(double baseValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Abs()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Negate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Inverse()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Increment()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Decrement()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Ceil()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Floor()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Round()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Truncate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Decimals()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number ShiftDecimalLeft(int shift)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number ShiftDecimalRight(int shift)
+        {
+            throw new NotImplementedException();
+        }
+
         public static Number Parse(string value)
         {
             throw new NotImplementedException();
