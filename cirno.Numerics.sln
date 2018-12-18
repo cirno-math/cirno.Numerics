@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cirno.Numerics", "cirno.Numerics\cirno.Numerics.csproj", "{6CCEF448-5DA8-4F44-86AA-EE0F1B22A3D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CCEF448-5DA8-4F44-86AA-EE0F1B22A3D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CCEF448-5DA8-4F44-86AA-EE0F1B22A3D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CCEF448-5DA8-4F44-86AA-EE0F1B22A3D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CCEF448-5DA8-4F44-86AA-EE0F1B22A3D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C308336-86CE-4A92-B0FE-0CB58D9B2B6E}
+	EndGlobalSection
+EndGlobal
