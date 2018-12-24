@@ -8,7 +8,7 @@ namespace cirno.Numerics
     /// It MUST assert given number is imperiodic by check factors of denominator is only 2 and 5.
     /// If not, it throws exception in constructor.
     /// </summary>
-    public struct ImperiodicNumber
+    public struct ImperiodicNumber : IComparable, IComparable<ImperiodicNumber>, IEquatable<ImperiodicNumber>
     {
         BigInteger numerator, denominator;
 
@@ -126,14 +126,19 @@ namespace cirno.Numerics
             this.denominator = factored.denominator;
         }
 
-        public void AssertValid()
+        private static bool IsValidDenominator(BigInteger denominator)
         {
             while (denominator % 2 == 0)
                 denominator /= 2;
             while (denominator % 5 == 0)
                 denominator /= 5;
 
-            if (denominator != 1)
+            return denominator == 1;
+        }
+
+        public void AssertValid()
+        {
+            if (!IsValidDenominator(denominator))
                 throw new ArgumentException("given value is not imperiodic number");
         }
 
@@ -167,6 +172,7 @@ namespace cirno.Numerics
                 factorsOf5 += 1;
             }
 
+            // `this` MUST be asserted but if...
             if (_denominator != 1)
                 throw new Exception("number is not imperiodic number but you tried convert to decimal. HOW??");
 
@@ -191,6 +197,81 @@ namespace cirno.Numerics
             @decimal = _numerator % denominator10;
         }
 
+        public static ImperiodicNumber Add(ImperiodicNumber a, ImperiodicNumber b)
+        {
+            var numerator = a.numerator * b.denominator + b.numerator * a.denominator;
+            var denominator = a.denominator * b.denominator;
+            return new ImperiodicNumber(numerator, denominator);
+        }
+
+        public static ImperiodicNumber Subtract(ImperiodicNumber a, ImperiodicNumber b)
+        {
+            var numerator = a.numerator * b.denominator - b.numerator * a.denominator;
+            var denominator = a.denominator * b.denominator;
+            return new ImperiodicNumber(numerator, denominator);
+        }
+
+        public static ImperiodicNumber Multiply(ImperiodicNumber a, ImperiodicNumber b)
+        {
+            var numerator = a.numerator * b.numerator;
+            var denominator = a.denominator * b.denominator;
+            return new ImperiodicNumber(numerator, denominator);
+        }
+
+        public static bool TryDivide(ImperiodicNumber a, ImperiodicNumber b, out ImperiodicNumber result)
+        {
+            if (b == 0)
+                return false;
+
+            var numerator = a.numerator * b.denominator;
+            var denominator = b.numerator * a.denominator;
+
+            try
+            {
+                result = new ImperiodicNumber(numerator, denominator);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static int Compare(ImperiodicNumber a, ImperiodicNumber b)
+        {
+            return a.CompareTo(b);
+        }
+
+        public int CompareTo(object o)
+        {
+            // TODO: If o is not ImperiodicNumber, it should check convertable
+            // But.. 굳이..?
+            if (o == null || !(o is ImperiodicNumber))
+                throw new ArgumentException("Given parameter is not ImperiodicNumber");
+
+            return CompareTo((ImperiodicNumber)o);
+        }
+
+        public int CompareTo(ImperiodicNumber value)
+        {
+            var left = numerator * value.denominator;
+            var right = value.numerator * denominator;
+
+            return left.CompareTo(right);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is ImperiodicNumber))
+                return false;
+            return Equals((ImperiodicNumber)obj);
+        }
+
+        public bool Equals(ImperiodicNumber value)
+        {
+            return CompareTo(value) == 0;
+        }
+
         public static implicit operator ImperiodicNumber(sbyte value)
             => new ImperiodicNumber(value);
         public static implicit operator ImperiodicNumber(short value)
@@ -211,5 +292,22 @@ namespace cirno.Numerics
             => new ImperiodicNumber(value);
         public static implicit operator ImperiodicNumber(double value)
             => new ImperiodicNumber(value);
+
+        public static bool operator ==(ImperiodicNumber left, ImperiodicNumber right)
+            => Compare(left, right) == 0;
+        public static bool operator !=(ImperiodicNumber left, ImperiodicNumber right)
+            => !(left == right);
+        public static bool operator <(ImperiodicNumber left, ImperiodicNumber right)
+            => Compare(left, right) < 0;
+        public static bool operator <=(ImperiodicNumber left, ImperiodicNumber right)
+            => Compare(left, right) <= 0;
+        public static bool operator >(ImperiodicNumber left, ImperiodicNumber right)
+            => Compare(left, right) > 0;
+        public static bool operator >=(ImperiodicNumber left, ImperiodicNumber right)
+            => Compare(left, right) >= 0;
+        public static bool operator true(ImperiodicNumber value)
+            => value != 0;
+        public static bool operator false(ImperiodicNumber value)
+            => value == 0;
     }
 }
