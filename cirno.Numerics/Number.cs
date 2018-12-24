@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Numerics;
+using cirno.Numerics.Inners;
 
 namespace cirno.Numerics
 {
     public class Number : IComparable, IComparable<Number>, IEquatable<Number>
     {
+        INumberValue inner;
         public Number()
         {
-            throw new NotImplementedException();
+            inner = new IntegerNumber(0);
         }
 
         public Number(BigInteger numerator, BigInteger denominator)
