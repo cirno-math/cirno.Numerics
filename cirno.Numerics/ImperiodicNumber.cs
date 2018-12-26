@@ -86,7 +86,8 @@ namespace cirno.Numerics
             value.Trim();
             value = value.Replace(",", "");
             int pos = value.IndexOf('.');
-            value = value.Replace(".", "");
+            if (pos >= 0)
+                value = value.Remove(pos, 1);
 
             if (pos < 0)
             {
