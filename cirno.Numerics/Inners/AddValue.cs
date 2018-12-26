@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
 using System.Text;
 
 namespace cirno.Numerics.Inners
 {
-    internal class IntegerNumber : INumberValue
+    public class AddValue : INumberValue
     {
-        BigInteger value;
-        public IntegerNumber(BigInteger value)
+        INumberValue left;
+        INumberValue right;
+
+        public AddValue(INumberValue left, INumberValue right)
         {
-            this.value = value;
+            this.left = left;
+            this.right = right;
         }
 
-        public decimal EvalAsDecimal()
+        public bool CanReduce()
         {
             throw new NotImplementedException();
         }
@@ -24,6 +26,11 @@ namespace cirno.Numerics.Inners
         }
 
         public bool TryAsImperiodic(out ImperiodicNumber value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ToExpression()
         {
             throw new NotImplementedException();
         }

@@ -7,47 +7,71 @@ namespace cirno.Numerics
     public class Number : IComparable, IComparable<Number>, IEquatable<Number>
     {
         INumberValue inner;
+
         public Number()
         {
-            inner = new IntegerNumber(0);
+            inner = new ImperiodicValue(0);
         }
 
         public Number(BigInteger numerator, BigInteger denominator)
         {
-            throw new NotImplementedException();
+            inner = new ImperiodicValue(new ImperiodicNumber(numerator, denominator));
         }
 
-        public Number Add(Number other)
+        private Number(INumberValue inner)
+            => this.inner = inner;
+
+        public string ToExactExpressionString()
         {
             throw new NotImplementedException();
         }
 
-        public Number Subtract(Number other)
+        public static Number Add(Number left, Number right)
+        {
+            return new Number(new AddValue(left.inner, right.inner));
+        }
+
+        public static Number Subtract(Number left, Number right)
         {
             throw new NotImplementedException();
         }
 
-        public Number Multiply(Number other)
+        public static Number Multiply(Number left, Number right)
         {
             throw new NotImplementedException();
         }
 
-        public Number Divide(Number other)
+        public static Number Divide(Number left, Number right)
         {
             throw new NotImplementedException();
         }
 
-        public Number Remainder(Number other)
+        public static Number Remainder(Number left, Number right)
         {
             throw new NotImplementedException();
         }
 
-        public Number DivideRemainder(Number other, out Number remainder)
+        public static Number DivideRemainder(Number left, Number right, out Number remainder)
         {
             throw new NotImplementedException();
         }
 
-        public Number Pow(Number exponent)
+        public static Number Pow(Number left, Number right)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Number Sqrt(Number value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Number Parse(string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Number Pow(Number other)
         {
             throw new NotImplementedException();
         }
@@ -57,78 +81,9 @@ namespace cirno.Numerics
             throw new NotImplementedException();
         }
 
-        public Number Log10()
+        public Number Sqrt3()
         {
-            throw new NotImplementedException();
-        }
-
-        public Number Log(double baseValue)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number Abs()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number Negate()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number Inverse()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number Increment()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number Decrement()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number Ceil()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number Floor()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number Round()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number Truncate()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number Decimals()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number ShiftDecimalLeft(int shift)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Number ShiftDecimalRight(int shift)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static Number Parse(string value)
-        {
+            // 이거는 어떻게 될 지 ㅗㅁ르겟다 구현은 다음의 내가 하겠지^^
             throw new NotImplementedException();
         }
 

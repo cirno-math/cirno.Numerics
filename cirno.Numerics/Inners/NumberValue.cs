@@ -6,10 +6,11 @@ namespace cirno.Numerics.Inners
 {
     public interface INumberValue
     {
-        decimal EvalAsDecimal();
-
+        bool CanReduce();
         INumberValue Reduced();
 
         bool TryAsImperiodic(out ImperiodicNumber value);
+
+        string ToExpression();
     }
 }
