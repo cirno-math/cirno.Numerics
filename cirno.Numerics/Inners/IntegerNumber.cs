@@ -12,5 +12,20 @@ namespace cirno.Numerics.Inners
         {
             this.value = value;
         }
+
+        public decimal EvalAsDecimal()
+        {
+            throw new NotImplementedException();
+        }
+
+        public INumberValue Reduced()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TryAsImperiodic(out ImperiodicNumber value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace cirno.Numerics
                 denominator = parsed.denominator;
             }
             else throw new ArgumentException($"failed parsing value: {value}");
-
+            
             AssertValid();
         }
 
@@ -92,7 +92,7 @@ namespace cirno.Numerics
             {
                 if (BigInteger.TryParse(value, out var numerator))
                 {
-                    parsed = new ImperiodicNumber(numerator).Factored();
+                    parsed = new ImperiodicNumber(numerator);
                     return true;
                 }
             }
@@ -101,7 +101,7 @@ namespace cirno.Numerics
                 if (BigInteger.TryParse(value, out var numerator))
                 {
                     var denominator = BigInteger.Pow(10, value.Length - pos);
-                    parsed = new ImperiodicNumber(numerator, denominator).Factored();
+                    parsed = new ImperiodicNumber(numerator, denominator);
                     return true;
                 }
             }
@@ -109,21 +109,11 @@ namespace cirno.Numerics
             return false;
         }
 
-        public ImperiodicNumber Factored()
+        private void Factor()
         {
-            if (denominator == 1)
-                return this;
-
             var factor = BigInteger.GreatestCommonDivisor(numerator, denominator);
-
-            return new ImperiodicNumber(numerator / factor, denominator / factor);
-        }
-
-        public void Factor()
-        {
-            var factored = Factored();
-            this.numerator = factored.numerator;
-            this.denominator = factored.denominator;
+            this.numerator = numerator / factor;
+            this.denominator = denominator / factor;
         }
 
         private static bool IsValidDenominator(BigInteger denominator)
@@ -237,6 +227,26 @@ namespace cirno.Numerics
             }
         }
 
+        public static ImperiodicNumber Pow(ImperiodicNumber a, int exponent)
+        {
+            if (a.numerator.IsZero)
+            {
+                return a;
+            }
+            else if (exponent < 0)
+            {
+                var numerator = BigInteger.Pow(a.denominator, -exponent);
+                var denominator = BigInteger.Pow(a.numerator, -exponent);
+                return new ImperiodicNumber(numerator, denominator);
+            }
+            else
+            {
+                var numerator = BigInteger.Pow(a.numerator, exponent);
+                var denominator = BigInteger.Pow(a.denominator, exponent);
+                return new ImperiodicNumber(numerator, denominator);
+            }
+        }
+
         public static int Compare(ImperiodicNumber a, ImperiodicNumber b)
         {
             return a.CompareTo(b);
@@ -270,6 +280,11 @@ namespace cirno.Numerics
         public bool Equals(ImperiodicNumber value)
         {
             return CompareTo(value) == 0;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public static implicit operator ImperiodicNumber(sbyte value)
